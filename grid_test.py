@@ -27,3 +27,11 @@ def test_three_diagonal_cells_inserted_into(empty_grid):
     assert grid.size() == (3, 3)
     for i in range(0, 3):
         assert grid[i, i] == i
+
+
+def test_no_cells_in(empty_grid):
+    for r in range(0, 9):
+        for c in range(0, 9):
+            assert empty_grid[r, c] == None
+    assert empty_grid.size() == (0, 0)
+    assert empty_grid.cell_count() == 0

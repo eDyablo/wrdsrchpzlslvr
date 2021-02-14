@@ -18,7 +18,7 @@ class Grid:
 
     def __getitem__(self, key):
         index = self.__index(*key)
-        return self.__cells[index]
+        return self.__cells[index] if index in self.__cells else None
 
     def __index(self, row, column):
         return f'{row}x{column}'
