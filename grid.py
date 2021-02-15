@@ -22,3 +22,6 @@ class Grid:
 
     def __index(self, row, column):
         return f'{row}x{column}'
+
+    def __contains__(self, key):
+        return self.__index(*key) in self.__cells
