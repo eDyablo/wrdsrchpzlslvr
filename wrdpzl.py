@@ -4,10 +4,12 @@ def find_in_string(string, words):
     begin, end = 0, 0
     while end <= len(string):
         word = string[begin:end]
-        print(word)
         if word in dictionary and dictionary[word]:
             found.append(word)
             begin += len(word)
+        else:
+            while begin < end and string[begin:end] not in dictionary:
+                begin += 1
         end += 1
     return found
 

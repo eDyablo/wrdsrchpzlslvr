@@ -7,6 +7,7 @@ from wrdpzl import (find_in_string, make_prefix_table)
     ('a', ['a'], ['a']),
     ('ab', ['a', 'b'], ['a', 'b']),
     ('abcd', ['ab', 'cd'], ['ab', 'cd']),
+    ('abxcd', ['ab', 'cd'], ['ab', 'cd']),
 ])
 def test_words_from_dictionary_found_in_string(string, dictionary, words):
     assert find_in_string(string, dictionary) == words
