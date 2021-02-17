@@ -7,8 +7,13 @@ def empty_string():
     return ''
 
 
-def test_no_words_found_in(empty_string):
-    found = find_in_string('', [])
+@fixture
+def empty_dictionary():
+    return []
+
+
+def test_no_words_found_in(empty_string, empty_dictionary):
+    found = find_in_string(empty_string, empty_dictionary)
     assert len(found) == 0
 
 
