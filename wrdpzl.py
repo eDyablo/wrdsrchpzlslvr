@@ -6,9 +6,10 @@ def find_in_string(string, words):
     while end <= len(string):
         while begin < end and string[begin:end] not in dictionary:
             begin += 1
-        word = string[begin:end]
-        if word in dictionary and dictionary[word]:
-            found.append(word)
+        for left in range(begin, end):
+            word = string[left:end]
+            if word in dictionary and dictionary[word]:
+                found.append(word)
         end += 1
     return found
 
