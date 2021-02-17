@@ -1,11 +1,11 @@
 def find_in_string(string, words):
-    dictionary = words
+    dictionary = make_prefix_table(words)
     found = []
     begin, end = 0, 0
     while end <= len(string):
         word = string[begin:end]
         print(word)
-        if word in dictionary:
+        if word in dictionary and dictionary[word]:
             found.append(word)
             begin += len(word)
         end += 1
