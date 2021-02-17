@@ -8,6 +8,7 @@ alphabet = [letter for letter in 'abcdefghijklmnopqrstuvwxyz']
     ('', [], []),
     ('a', ['a'], ['a']),
     ('ab', ['a', 'b'], ['a', 'b']),
+    ('a', ['a', 'ab'], ['a']),
     ('abcd', ['ab', 'cd'], ['ab', 'cd']),
     ('abxcd', ['ab', 'cd'], ['ab', 'cd']),
     ('abc', ['ab', 'bc'], ['ab', 'bc']),
@@ -29,6 +30,7 @@ def test_words_from_dictionary_found_in_string(string, dictionary, words):
     ([], {}),
     (['a'], {'a': 'a'}),
     (['ab'], {'a': None, 'ab': 'ab'}),
+    (['a', 'ab'], {'a': 'a', 'ab': 'ab'}),
 ])
 def test_prefix_table_made_from_words(words, table):
     assert make_prefix_table(words) == table

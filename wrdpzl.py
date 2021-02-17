@@ -17,6 +17,8 @@ def make_prefix_table(words):
     table = {}
     for word in words:
         for size in range(1, len(word)):
-            table[word[0:size]] = None
+            prefix = word[0:size]
+            if prefix not in table:
+                table[prefix] = None
         table[word] = word
     return table
