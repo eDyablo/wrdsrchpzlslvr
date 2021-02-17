@@ -1,6 +1,8 @@
 from pytest import mark
 from wrdpzl import (find_in_string, make_prefix_table)
 
+alphabet = [letter for letter in 'abcdefghijklmnopqrstuvwxyz']
+
 
 @mark.parametrize('string, dictionary, words', [
     ('', [], []),
@@ -11,6 +13,8 @@ from wrdpzl import (find_in_string, make_prefix_table)
     ('abc', ['ab', 'bc'], ['ab', 'bc']),
     ('abc', ['abc', 'bc'], ['abc', 'bc']),
     ('abcd', ['abcd', 'bc'], ['bc', 'abcd']),
+    (''.join(alphabet), alphabet, alphabet),
+    (''.join(alphabet), [''.join(alphabet)], [''.join(alphabet)]),
 ])
 def test_words_from_dictionary_found_in_string(string, dictionary, words):
     assert find_in_string(string, dictionary) == words

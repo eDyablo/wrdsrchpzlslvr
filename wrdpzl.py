@@ -1,6 +1,5 @@
 def find_in_string(string, words):
     dictionary = make_prefix_table(words)
-    print(dictionary)
     found = []
     begin, end = 0, 0
     while end <= len(string):
