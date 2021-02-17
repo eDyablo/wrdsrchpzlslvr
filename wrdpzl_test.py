@@ -19,6 +19,7 @@ alphabet = [letter for letter in 'abcdefghijklmnopqrstuvwxyz']
      ['star', 'start', 'tart', 'art']),
     ('aacarelessaa', ['careless', 'care', 'car', 'less', 'are'], [
      'car', 'care', 'are', 'careless', 'less']),
+    ('scosmo', ['cosmos'], []),
 ])
 def test_words_from_dictionary_found_in_string(string, dictionary, words):
     assert find_in_string(string, dictionary) == words
