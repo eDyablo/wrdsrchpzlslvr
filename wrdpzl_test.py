@@ -15,6 +15,10 @@ alphabet = [letter for letter in 'abcdefghijklmnopqrstuvwxyz']
     ('abcd', ['abcd', 'bc'], ['bc', 'abcd']),
     (''.join(alphabet), alphabet, alphabet),
     (''.join(alphabet), [''.join(alphabet)], [''.join(alphabet)]),
+    ('start', ['start', 'star', 'art', 'tart'],
+     ['star', 'start', 'tart', 'art']),
+    ('aacarelessaa', ['careless', 'care', 'car', 'less', 'are'], [
+     'car', 'care', 'are', 'careless', 'less']),
 ])
 def test_words_from_dictionary_found_in_string(string, dictionary, words):
     assert find_in_string(string, dictionary) == words
