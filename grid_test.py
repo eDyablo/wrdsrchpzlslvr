@@ -47,3 +47,18 @@ def test_the_containment_operator_of(grid):
     assert (1, 2) not in grid
     assert (2, 1) not in grid
     assert (2, 2) not in grid
+
+
+@fixture
+def filled_grid(grid):
+    for row in range(0, 5):
+        for column in range(0, 5):
+            grid[row, column] = (row, column)
+    return grid
+
+
+def test_content_of(filled_grid):
+    rows, columns = filled_grid.size()
+    for row in range(0, rows):
+        for column in range(0, columns):
+            assert filled_grid[row, column] == (row, column)
