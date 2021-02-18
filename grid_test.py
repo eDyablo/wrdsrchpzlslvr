@@ -9,6 +9,7 @@ def grid():
 
 def test_empty(grid):
     assert grid.cell_count() == 0
+    assert grid.size() == (0, 0)
 
 
 def test_one_cell_when_insert_into_0_0_cell_of(grid):
