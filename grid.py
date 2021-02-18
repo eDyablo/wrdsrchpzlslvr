@@ -33,4 +33,6 @@ class Grid:
         return f'{row}x{column}'
 
     def __contains__(self, key):
-        return (0 <= key[0] and key[0] < self.__size[0]) and (0 <= key[1] and key[1] < self.__size[1])
+        row, column = key
+        row_count, column_count = self.size()
+        return (0 <= row < row_count) and (0 <= column < column_count)
