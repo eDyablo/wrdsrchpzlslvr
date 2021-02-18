@@ -1,5 +1,6 @@
 from grid import Grid
 from pytest import fixture
+import operator
 
 
 @fixture
@@ -63,3 +64,15 @@ def test_iteration_along_each_column_of_the(filled_grid):
     for column in range(0, column_count):
         assert list(filled_grid.iterate((0, column), (1, 0))) == [
             (row, column) for row in range(0, row_count)]
+
+
+def test_iteration_along_main_diagonals_of_the(filled_grid):
+    row_count, column_count = filled_grid.size()
+    assert list(filled_grid.iterate((0, 0), (1, 1))) == [
+        (i, i) for i in range(0, min(row_count, column_count))]
+    assert list(filled_grid.iterate((row_count-1, column_count-1), (-1, -1))
+                ) == [(i, i) for i in range(min(row_count, column_count) - 1, -1, -1)]
+    assert list(filled_grid.iterate((row_count-1, 0), (-1, 1))
+                ) == [(row_count-1 - i, i) for i in range(0, min(row_count, column_count))]
+    assert list(filled_grid.iterate((0, column_count-1), (1, -1))
+                ) == [(i, column_count-1 - i) for i in range(0, min(row_count, column_count))]
