@@ -1,5 +1,5 @@
-from pytest import fixture
 from grid import Grid
+from pytest import fixture
 
 
 @fixture
@@ -36,19 +36,6 @@ def test_no_cells_in_empty(grid):
     assert grid.cell_count() == 0
 
 
-def test_the_containment_operator_of(grid):
-    grid[1, 1] = 1
-    assert (0, 0) not in grid
-    assert (0, 1) not in grid
-    assert (0, 2) not in grid
-    assert (1, 0) not in grid
-    assert (2, 0) not in grid
-    assert (1, 1) in grid
-    assert (1, 2) not in grid
-    assert (2, 1) not in grid
-    assert (2, 2) not in grid
-
-
 @fixture
 def filled_grid(grid):
     for row in range(0, 5):
@@ -62,3 +49,17 @@ def test_content_of(filled_grid):
     for row in range(0, rows):
         for column in range(0, columns):
             assert filled_grid[row, column] == (row, column)
+
+
+def test_iteration_along_each_row_of_the(filled_grid):
+    row_count, column_count = filled_grid.size()
+    for row in range(0, row_count):
+        assert list(filled_grid.iterate((row, 0), (0, 1))) == [
+            (row, column) for column in range(0, column_count)]
+
+
+def test_iteration_along_each_column_of_the(filled_grid):
+    row_count, column_count = filled_grid.size()
+    for column in range(0, column_count):
+        assert list(filled_grid.iterate((0, column), (1, 0))) == [
+            (row, column) for row in range(0, row_count)]

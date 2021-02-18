@@ -1,3 +1,6 @@
+import operator
+
+
 class Grid:
     def __init__(self):
         self.__cells = dict()
@@ -8,6 +11,12 @@ class Grid:
 
     def size(self):
         return self.__size
+
+    def iterate(self, begin, direction):
+        cursor = begin
+        while cursor in self:
+            yield self[cursor]
+            cursor = tuple(map(operator.add, cursor, direction))
 
     def __setitem__(self, key, value):
         row, column = key
@@ -24,4 +33,4 @@ class Grid:
         return f'{row}x{column}'
 
     def __contains__(self, key):
-        return self.__index(*key) in self.__cells
+        return (0 <= key[0] and key[0] < self.__size[0]) and (0 <= key[1] and key[1] < self.__size[1])
