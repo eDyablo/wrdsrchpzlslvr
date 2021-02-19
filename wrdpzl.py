@@ -1,3 +1,6 @@
+from grid import Grid
+
+
 class Hunter:
     def __init__(self, words):
         self.__table = make_prefix_table(words)
@@ -26,3 +29,13 @@ def make_prefix_table(words):
                 table[prefix] = None
         table[word] = word
     return table
+
+
+class Board(Grid):
+    @staticmethod
+    def load(data):
+        board = Board()
+        for row, record in enumerate(data):
+            for column, item in enumerate(record):
+                board[row, column] = item
+        return board
