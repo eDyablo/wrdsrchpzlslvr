@@ -68,11 +68,11 @@ def test_iteration_along_each_column_of_the(filled_grid):
 
 def test_iteration_along_main_diagonals_of_the(filled_grid):
     row_count, column_count = filled_grid.size()
-    assert list(filled_grid.iterate((0, 0), (1, 1))) == [
+    assert list(filled_grid.iterate((0, 0), Grid.DIAGONALLY_DOWN_RIGHT)) == [
         (i, i) for i in range(0, min(row_count, column_count))]
-    assert list(filled_grid.iterate((row_count-1, column_count-1), (-1, -1))
+    assert list(filled_grid.iterate((row_count-1, column_count-1), Grid.DIAGONALLY_UP_LEFT)
                 ) == [(i, i) for i in range(min(row_count, column_count) - 1, -1, -1)]
-    assert list(filled_grid.iterate((row_count-1, 0), (-1, 1))
+    assert list(filled_grid.iterate((row_count-1, 0), Grid.DIAGONALLY_UP_RIGHT)
                 ) == [(row_count-1 - i, i) for i in range(0, min(row_count, column_count))]
-    assert list(filled_grid.iterate((0, column_count-1), (1, -1))
+    assert list(filled_grid.iterate((0, column_count-1), Grid.DIAGONALLY_DOWN_LEFT)
                 ) == [(i, column_count-1 - i) for i in range(0, min(row_count, column_count))]

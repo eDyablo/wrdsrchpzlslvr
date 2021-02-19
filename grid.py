@@ -2,6 +2,15 @@ import operator
 
 
 class Grid:
+    DOWNWARD = (1, 0)
+    LEFTWARD = (0, -1)
+    RIGHTWARD = (0, 1)
+    UPWARD = (-1, 0)
+    DIAGONALLY_DOWN_LEFT = tuple(map(operator.add, DOWNWARD, LEFTWARD))
+    DIAGONALLY_DOWN_RIGHT = tuple(map(operator.add, DOWNWARD, RIGHTWARD))
+    DIAGONALLY_UP_LEFT = tuple(map(operator.add, UPWARD, LEFTWARD))
+    DIAGONALLY_UP_RIGHT = tuple(map(operator.add, UPWARD, RIGHTWARD))
+
     def __init__(self):
         self.__cells = dict()
         self.__size = 0, 0
