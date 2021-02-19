@@ -1,5 +1,5 @@
 from pytest import mark
-from wrdpzl import (find_in_string, make_prefix_table)
+from wrdpzl import (Hunter, make_prefix_table)
 
 alphabet = [letter for letter in 'abcdefghijklmnopqrstuvwxyz']
 
@@ -23,7 +23,8 @@ alphabet = [letter for letter in 'abcdefghijklmnopqrstuvwxyz']
     ('scosmo', ['cosmos'], []),
 ])
 def test_words_from_dictionary_found_in_string(string, dictionary, words):
-    assert find_in_string(string, dictionary) == words
+    hunter = Hunter(dictionary)
+    assert hunter.find_in_string(string) == words
 
 
 @mark.parametrize('words, table', [
