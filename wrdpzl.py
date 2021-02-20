@@ -54,6 +54,11 @@ class Board(Grid):
     def letters(self):
         return self.values()
 
+    def __str__(self):
+        row_count, _ = self.size()
+        return'\n'.join([' '.join(map(str, self.iterate((row, 0), self.RIGHTWARD)))
+                         for row in range(0, row_count)])
+
 
 class Solver:
     def __init__(self, words):
@@ -90,3 +95,22 @@ class Solver:
             found.extend(hunter.find(up_right))
             found.extend(hunter.find(up_right[::-1]))
         return found
+
+
+def main():
+    alphabet = 'abcdefghijklmnopqrstuvwxyz'
+
+    board = Board.random(alphabet, (15, 15))
+
+    print(board)
+
+    with open('words.txt') as file:
+        words = list(map(str.strip, file.readlines()))
+
+    solved = Solver(words).solve(board)
+
+    print(*solved)
+
+
+if __name__ == "__main__":
+    main()
