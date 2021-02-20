@@ -212,8 +212,8 @@ def parse_size(text) -> tuple:
     if not text:
         return (0, 0)
     try:
-        s = int(text)
-        return (s, s)
+        number = int(text)
+        return (number, number)
     except:
         return tuple(map(int, split(r'\s*\D\s*', text, 2)))
 
