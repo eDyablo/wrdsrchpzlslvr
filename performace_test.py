@@ -8,7 +8,7 @@ def words():
         return list(map(str.strip, file.readlines()))
 
 
-@fixture
+@fixture(scope='module')
 def solver(words):
     return Solver(words)
 
