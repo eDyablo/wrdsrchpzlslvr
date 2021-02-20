@@ -166,6 +166,10 @@ def argparser():
                         help='sequence of letters')
     parser.add_argument('--no-board', dest='show_board',
                         action='store_false', default=True, help='do not show board')
+    parser.add_argument('--no-words', dest='show_found',
+                        action='store_false', default=True, help='do not show found words')
+    parser.add_argument('--count', dest='show_count', action='store_true',
+                        default=False, help='show count of found words')
     return parser
 
 
@@ -190,14 +194,14 @@ def main():
 
     board = Board.random(args.letters, parse_size(args.random_size))
 
-    if args.show_board:
-        print(board)
+    print(board) if args.show_board and board.letters() else None
 
     words = load_words(args.words_file)
 
-    solved = Solver(words).solve(board)
+    found = Solver(words).solve(board)
 
-    print(*solved)
+    print(len(found)) if found and args.show_count else None
+    print(*found) if found and args.show_found else None
 
 
 if __name__ == "__main__":
