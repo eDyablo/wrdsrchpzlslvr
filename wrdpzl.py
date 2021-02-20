@@ -1,4 +1,5 @@
 from grid import Grid
+from random import choice as choice_from
 
 
 class Hunter:
@@ -39,6 +40,19 @@ class Board(Grid):
             for column, item in enumerate(record):
                 board[row, column] = item
         return board
+
+    @staticmethod
+    def random(sequence, size):
+        board = Board()
+        if len(sequence):
+            row_count, column_count = size
+            for row in range(0, row_count):
+                for column in range(0, column_count):
+                    board[row, column] = choice_from(sequence)
+        return board
+
+    def letters(self):
+        return self.values()
 
 
 class Solver:

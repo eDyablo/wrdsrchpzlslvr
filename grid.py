@@ -27,6 +27,9 @@ class Grid:
             yield self[cursor]
             cursor = tuple(map(operator.add, cursor, direction))
 
+    def values(self):
+        return self.__cells.values()
+
     def __setitem__(self, key, value):
         row, column = key
         index = self.__index(row, column)
