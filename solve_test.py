@@ -5,8 +5,8 @@ from wrdpzl import(Board, solve)
 @fixture
 def words():
     return [
-        'ad',
-        'bag',
+        'at',
+        'box',
         'cage',
         'daily',
         'puzzle',
@@ -71,17 +71,17 @@ def words():
         '......',
         '......',
         'b.....',
-        '.a....',
-        '..g...',
-    ]), ['bag']),
+        '.o....',
+        '..x...',
+    ]), ['box']),
     (Board.load([
         '......',
         '......',
         '......',
         '......',
         'a.....',
-        '.d....',
-    ]), ['ad']),
+        '.t....',
+    ]), ['at']),
     (Board.load([
         '.d....',
         '..a...',
@@ -100,20 +100,36 @@ def words():
     ]), ['cage']),
     (Board.load([
         '...b..',
-        '....a.',
-        '.....g',
+        '....o.',
+        '.....x',
         '......',
         '......',
         '......',
-    ]), ['bag']),
+    ]), ['box']),
     (Board.load([
         '....a.',
-        '.....d',
+        '.....t',
         '......',
         '......',
         '......',
         '......',
-    ]), ['ad']),
+    ]), ['at']),
+    (Board.load([
+        '.txeye',
+        'aogll.',
+        'baiz..',
+        'caz...',
+        'du....',
+        'p.....',
+    ]), ['at', 'box', 'cage', 'daily', 'puzzle']),
+    (Board.load([
+        '.....e',
+        '....ly',
+        '...zle',
+        '..zigx',
+        '.uaaot',
+        'pdcba.',
+    ]), ['at', 'box', 'cage', 'daily', 'puzzle']),
 ])
 def test_find_words_on(board, words, expected):
-    assert solve(board, words) == expected
+    assert sorted(solve(board, words)) == expected
