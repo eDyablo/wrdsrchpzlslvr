@@ -1,5 +1,5 @@
 from pytest import (fixture, mark)
-from wrdpzl import (Board, Hunter, make_prefix_table)
+from wrdpzl import (Board, Hunter, make_prefix_table, solve)
 
 alphabet = [letter for letter in 'abcdefghijklmnopqrstuvwxyz']
 
@@ -53,3 +53,50 @@ def test_load_from_empty_sequence():
 ])
 def test_load(data):
     assert Board.load(data).size() == (len(data), max(map(len, data)))
+
+
+@fixture
+def words():
+    return [
+        'puzzle',
+        'puzzled',
+        'puzzlement',
+        'puzzler',
+        'puzzlers',
+        'puzzles',
+        'puzzling',
+    ]
+
+
+@mark.parametrize('board', [
+    (Board.load([
+        'puzzle',
+    ])),
+    (Board.load([
+        '',
+        'puzzle',
+    ])),
+    (Board.load([
+        '',
+        '',
+        'puzzle',
+    ])),
+    (Board.load([
+        'p__',
+        'u__',
+        'z__',
+        'z__',
+        'l__',
+        'e__',
+    ])),
+    (Board.load([
+        '__p',
+        '__u',
+        '__z',
+        '__z',
+        '__l',
+        '__e',
+    ]))
+])
+def test_find_words_in_rows(board, words):
+    assert solve(board, words) == ['puzzle']

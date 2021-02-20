@@ -39,3 +39,16 @@ class Board(Grid):
             for column, item in enumerate(record):
                 board[row, column] = item
         return board
+
+
+def solve(board, words):
+    hunter = Hunter(words)
+    found = []
+    row_count, column_count = board.size()
+    for row in range(0, row_count):
+        found.extend(hunter.find_in_string(
+            ''.join(map(str, board.iterate((row, 0), Grid.RIGHTWARD)))))
+    for column in range(0, column_count):
+        found.extend(hunter.find_in_string(
+            ''.join(map(str, board.iterate((0, column), Grid.DOWNWARD)))))
+    return found
