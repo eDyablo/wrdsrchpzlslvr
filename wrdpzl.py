@@ -46,15 +46,17 @@ def solve(board, words):
     found = []
     row_count, column_count = board.size()
     for row in range(0, row_count):
-        found.extend(hunter.find_in_string(
-            ''.join(map(str, board.iterate((row, 0), Grid.RIGHTWARD)))))
+        rightward = ''.join(map(str, board.iterate((row, 0), Grid.RIGHTWARD)))
+        found.extend(hunter.find_in_string(rightward))
+        found.extend(hunter.find_in_string(rightward[::-1]))
         found.extend(hunter.find_in_string(
             ''.join(map(str, board.iterate((row, 0), Grid.DIAGONALLY_DOWN_RIGHT)))))
         found.extend(hunter.find_in_string(
             ''.join(map(str, board.iterate((row + 1, 0), Grid.DIAGONALLY_UP_RIGHT)))))
     for column in range(0, column_count):
-        found.extend(hunter.find_in_string(
-            ''.join(map(str, board.iterate((0, column), Grid.DOWNWARD)))))
+        downward = ''.join(map(str, board.iterate((0, column), Grid.DOWNWARD)))
+        found.extend(hunter.find_in_string(downward))
+        found.extend(hunter.find_in_string(downward[::-1]))
         found.extend(hunter.find_in_string(
             ''.join(map(str, board.iterate((0, column + 1), Grid.DIAGONALLY_DOWN_RIGHT)))))
         found.extend(hunter.find_in_string(

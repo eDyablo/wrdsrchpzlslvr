@@ -50,6 +50,21 @@ from wrdpzl import(Board, solve)
         '.uaaot',
         'pdcba.',
     ]), ['at', 'box', 'cage', 'daily', 'puzzle']),
+    (Board.load([
+        'elzzup',
+        'yliad',
+        'egac',
+        'xob',
+        'ta',
+    ]), ['at', 'box', 'cage', 'daily', 'puzzle']),
+    (Board.load([
+        '    e',
+        '   yl',
+        '  elz',
+        ' xgiz',
+        'toaau',
+        'abcdp',
+    ]), ['at', 'box', 'cage', 'daily', 'puzzle']),
 ])
 def test_solve(board, words):
     assert sorted(solve(board, words)) == words
