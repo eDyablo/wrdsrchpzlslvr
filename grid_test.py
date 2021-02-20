@@ -1,6 +1,5 @@
 from grid import Grid
 from pytest import fixture
-import operator
 
 
 @fixture

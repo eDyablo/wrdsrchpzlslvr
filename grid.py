@@ -1,4 +1,4 @@
-import operator
+from operator import add
 
 
 class Grid:
@@ -6,10 +6,10 @@ class Grid:
     LEFTWARD = (0, -1)
     RIGHTWARD = (0, 1)
     UPWARD = (-1, 0)
-    DIAGONALLY_DOWN_LEFT = tuple(map(operator.add, DOWNWARD, LEFTWARD))
-    DIAGONALLY_DOWN_RIGHT = tuple(map(operator.add, DOWNWARD, RIGHTWARD))
-    DIAGONALLY_UP_LEFT = tuple(map(operator.add, UPWARD, LEFTWARD))
-    DIAGONALLY_UP_RIGHT = tuple(map(operator.add, UPWARD, RIGHTWARD))
+    DIAGONALLY_DOWN_LEFT = tuple(map(add, DOWNWARD, LEFTWARD))
+    DIAGONALLY_DOWN_RIGHT = tuple(map(add, DOWNWARD, RIGHTWARD))
+    DIAGONALLY_UP_LEFT = tuple(map(add, UPWARD, LEFTWARD))
+    DIAGONALLY_UP_RIGHT = tuple(map(add, UPWARD, RIGHTWARD))
 
     def __init__(self):
         self.__cells = dict()
@@ -25,7 +25,7 @@ class Grid:
         cursor = begin
         while cursor in self:
             yield self[cursor]
-            cursor = tuple(map(operator.add, cursor, direction))
+            cursor = tuple(map(add, cursor, direction))
 
     def values(self):
         return self.__cells.values()
