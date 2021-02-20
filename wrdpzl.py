@@ -48,6 +48,8 @@ def solve(board, words):
     for row in range(0, row_count):
         found.extend(hunter.find_in_string(
             ''.join(map(str, board.iterate((row, 0), Grid.RIGHTWARD)))))
+        found.extend(hunter.find_in_string(
+            ''.join(map(str, board.iterate((row, 0), Grid.DIAGONALLY_DOWN_RIGHT)))))
     for column in range(0, column_count):
         found.extend(hunter.find_in_string(
             ''.join(map(str, board.iterate((0, column), Grid.DOWNWARD)))))

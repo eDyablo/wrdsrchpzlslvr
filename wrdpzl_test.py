@@ -58,6 +58,9 @@ def test_load(data):
 @fixture
 def words():
     return [
+        'acmes',
+        'babe',
+        'cab',
         'puzzle',
         'puzzled',
         'puzzlement',
@@ -68,19 +71,19 @@ def words():
     ]
 
 
-@mark.parametrize('board', [
+@mark.parametrize('board, expected', [
     (Board.load([
         'puzzle',
-    ])),
+    ]), ['puzzle']),
     (Board.load([
         '',
         'puzzle',
-    ])),
+    ]), ['puzzle']),
     (Board.load([
         '',
         '',
         'puzzle',
-    ])),
+    ]), ['puzzle']),
     (Board.load([
         'p__',
         'u__',
@@ -88,7 +91,7 @@ def words():
         'z__',
         'l__',
         'e__',
-    ])),
+    ]), ['puzzle']),
     (Board.load([
         '__p',
         '__u',
@@ -96,7 +99,39 @@ def words():
         '__z',
         '__l',
         '__e',
-    ]))
+    ]), ['puzzle']),
+    (Board.load([
+        'p.....',
+        '.u....',
+        '..z...',
+        '...z..',
+        '....l.',
+        '.....e',
+    ]), ['puzzle']),
+    (Board.load([
+        '......',
+        'a.....',
+        '.c....',
+        '..m...',
+        '...e..',
+        '....s.',
+    ]), ['acmes']),
+    (Board.load([
+        '......',
+        '......',
+        'b.....',
+        '.a....',
+        '..b...',
+        '...e..',
+    ]), ['babe']),
+    (Board.load([
+        '......',
+        '......',
+        '......',
+        'c.....',
+        '.a....',
+        '..b...',
+    ]), ['cab']),
 ])
-def test_find_words_in_rows(board, words):
-    assert solve(board, words) == ['puzzle']
+def test_find_words_on(board, words, expected):
+    assert solve(board, words) == expected
