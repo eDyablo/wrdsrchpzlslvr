@@ -2,118 +2,38 @@ from pytest import (fixture, mark)
 from wrdpzl import(Board, solve)
 
 
-@fixture
-def words():
-    return [
+@mark.parametrize('board, words', [
+    (Board.load([
         'at',
         'box',
         'cage',
         'daily',
         'puzzle',
-    ]
-
-
-@mark.parametrize('board, expected', [
+    ]), ['at', 'box', 'cage', 'daily', 'puzzle']),
     (Board.load([
-        'puzzle',
-    ]), ['puzzle']),
-    (Board.load([
-        '',
-        'puzzle',
-    ]), ['puzzle']),
-    (Board.load([
-        '',
-        '',
-        'puzzle',
-    ]), ['puzzle']),
-    (Board.load([
-        'p__',
-        'u__',
-        'z__',
-        'z__',
-        'l__',
-        'e__',
-    ]), ['puzzle']),
-    (Board.load([
-        '__p',
-        '__u',
-        '__z',
-        '__z',
-        '__l',
-        '__e',
-    ]), ['puzzle']),
+        'abcdp',
+        'toaau',
+        '.xgiz',
+        '..elz',
+        '...yl',
+        '....e',
+    ]), ['at', 'box', 'cage', 'daily', 'puzzle']),
     (Board.load([
         'p.....',
-        '.u....',
-        '..z...',
-        '...z..',
-        '....l.',
+        'du....',
+        'caz...',
+        'baiz..',
+        'aogll.',
+        '.txeye',
+    ]), ['at', 'box', 'cage', 'daily', 'puzzle']),
+    (Board.load([
+        'pdcba.',
+        '.uaaot',
+        '..zigx',
+        '...zle',
+        '....ly',
         '.....e',
-    ]), ['puzzle']),
-    (Board.load([
-        '......',
-        'd.....',
-        '.a....',
-        '..i...',
-        '...l..',
-        '....y.',
-    ]), ['daily']),
-    (Board.load([
-        '......',
-        '......',
-        'c.....',
-        '.a....',
-        '..g...',
-        '...e..',
-    ]), ['cage']),
-    (Board.load([
-        '......',
-        '......',
-        '......',
-        'b.....',
-        '.o....',
-        '..x...',
-    ]), ['box']),
-    (Board.load([
-        '......',
-        '......',
-        '......',
-        '......',
-        'a.....',
-        '.t....',
-    ]), ['at']),
-    (Board.load([
-        '.d....',
-        '..a...',
-        '...i..',
-        '....l.',
-        '.....y',
-        '......',
-    ]), ['daily']),
-    (Board.load([
-        '..c...',
-        '...a..',
-        '....g.',
-        '.....e',
-        '......',
-        '......',
-    ]), ['cage']),
-    (Board.load([
-        '...b..',
-        '....o.',
-        '.....x',
-        '......',
-        '......',
-        '......',
-    ]), ['box']),
-    (Board.load([
-        '....a.',
-        '.....t',
-        '......',
-        '......',
-        '......',
-        '......',
-    ]), ['at']),
+    ]), ['at', 'box', 'cage', 'daily', 'puzzle']),
     (Board.load([
         '.txeye',
         'aogll.',
@@ -131,5 +51,5 @@ def words():
         'pdcba.',
     ]), ['at', 'box', 'cage', 'daily', 'puzzle']),
 ])
-def test_find_words_on(board, words, expected):
-    assert sorted(solve(board, words)) == expected
+def test_solve(board, words):
+    assert sorted(solve(board, words)) == words
