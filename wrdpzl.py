@@ -1,5 +1,7 @@
+from argparse import ArgumentParser
 from operator import add
 from random import choice as choice_from
+from re import split
 
 
 class Grid:
@@ -146,15 +148,50 @@ class Solver:
         return found
 
 
+def argparser():
+    parser = ArgumentParser(
+        description="Words search puzzle solver."
+    )
+    parser.add_argument(
+        "-v", "--version", action="version",
+        version=f"{parser.prog} version 1.0.0"
+    )
+    parser.add_argument('-r', '--random', dest='random_size', default='15x15',
+                        help='random board size')
+    parser.add_argument('-w', '--words', dest='words_file', default='words.txt',
+                        help='file contains words')
+    parser.add_argument('-l', '--letters', default='abcdefghijklmnopqrstuvwxyz',
+                        help='sequence of letters')
+    parser.add_argument('--no-board', dest='show_board',
+                        action='store_false', default=True, help='do not show board')
+    return parser
+
+
+def load_words(path):
+    with open(path) as file:
+        return list(map(str.strip, file.readlines()))
+
+
+def parse_size(text):
+    text = text.strip()
+    if not text:
+        return (0, 0)
+    try:
+        s = int(text)
+        return (s, s)
+    except:
+        return tuple(map(int, split(r'\s*\D\s*', text, 2)))
+
+
 def main():
-    alphabet = 'abcdefghijklmnopqrstuvwxyz'
+    args = argparser().parse_args()
 
-    board = Board.random(alphabet, (15, 15))
+    board = Board.random(args.letters, parse_size(args.random_size))
 
-    print(board)
+    if args.show_board:
+        print(board)
 
-    with open('words.txt') as file:
-        words = list(map(str.strip, file.readlines()))
+    words = load_words(args.words_file)
 
     solved = Solver(words).solve(board)
 
