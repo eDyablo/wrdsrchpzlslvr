@@ -7,6 +7,9 @@ from re import split
 
 
 class Grid:
+    """
+    Represents a rectangular shape grid that can hold values.
+    """
     DOWNWARD = (1, 0)
     LEFTWARD = (0, -1)
     RIGHTWARD = (0, 1)
@@ -20,19 +23,23 @@ class Grid:
         self.__cells = dict()
         self.__size = 0, 0
 
-    def cell_count(self):
+    def cell_count(self) -> int:
+        """Returns number of cells in the grid"""
         return len(self.__cells)
 
-    def size(self):
+    def size(self) -> tuple:
+        """Returns size of the grid as a tuple of rows and columns counts"""
         return self.__size
 
     def iterate(self, begin, direction):
+        """Returns generator that iterates through the grid towards the direction starting from the begin"""
         cursor = begin
         while cursor in self:
             yield self[cursor]
             cursor = tuple(map(add, cursor, direction))
 
-    def values(self):
+    def values(self) -> list:
+        """Returns values stored in the grid"""
         return self.__cells.values()
 
     def __setitem__(self, key, value):
@@ -56,25 +63,31 @@ class Grid:
 
 
 class Hunter:
+    """
+    Is a hunter that goes along a sequence and search for known words
+    """
+
     def __init__(self, words):
         self.__table = make_prefix_table(words)
 
-    def find(self, string):
+    def find(self, sequence) -> list:
+        """Returns list of words found in the sequence"""
         dictionary = self.__table
         found = []
         begin, end = 0, 0
-        while end <= len(string):
-            while begin < end and string[begin:end] not in dictionary:
+        while end <= len(sequence):
+            while begin < end and sequence[begin:end] not in dictionary:
                 begin += 1
             for left in range(begin, end):
-                word = string[left:end]
+                word = sequence[left:end]
                 if word in dictionary and dictionary[word]:
                     found.append(word)
             end += 1
         return found
 
 
-def make_prefix_table(words):
+def make_prefix_table(words) -> dict:
+    """Constructs a dictionary holding the words and their prefixes"""
     table = {}
     for word in words:
         for size in range(1, len(word)):
@@ -86,8 +99,12 @@ def make_prefix_table(words):
 
 
 class Board(Grid):
+    """
+    Represents rectangular board with letters
+    """
     @staticmethod
-    def load(data):
+    def load(data) -> object:
+        """Loads the board with data in form of sequence of letter sequences"""
         board = Board()
         for row, record in enumerate(data):
             for column, item in enumerate(record):
@@ -95,7 +112,8 @@ class Board(Grid):
         return board
 
     @staticmethod
-    def random(sequence, size):
+    def random(sequence, size) -> object:
+        """Generates a board of specified size filled with letters chosen randomly from the sequence"""
         board = Board()
         if len(sequence):
             row_count, column_count = size
@@ -104,7 +122,8 @@ class Board(Grid):
                     board[row, column] = choice_from(sequence)
         return board
 
-    def letters(self):
+    def letters(self) -> list:
+        """Returns letters placed on the board"""
         return self.values()
 
     def __str__(self):
@@ -114,10 +133,15 @@ class Board(Grid):
 
 
 class Solver:
+    """
+    The solver that can easily crack the word search puzzles
+    """
+
     def __init__(self, words):
         self.__hunter = Hunter(words)
 
-    def solve(self, board):
+    def solve(self, board) -> list:
+        """Solves the puzzel on the board and returns list of found words"""
         hunter = self.__hunter
         found = []
         row_count, column_count = board.size()
@@ -173,7 +197,8 @@ def argparser():
     return parser
 
 
-def load_words(path):
+def load_words(path) -> list:
+    """Returns list of all words from the file that has each word in a distinct line"""
     try:
         with open(path) as file:
             return list(map(str.strip, file.readlines()))
@@ -181,7 +206,8 @@ def load_words(path):
         return []
 
 
-def parse_size(text):
+def parse_size(text) -> tuple:
+    """Parses grid size from its textual representation"""
     text = text.strip()
     if not text:
         return (0, 0)
@@ -193,6 +219,7 @@ def parse_size(text):
 
 
 def main():
+    """The program entrypoint"""
     args = argparser().parse_args()
 
     board = Board.random(args.letters, parse_size(args.random_size))
