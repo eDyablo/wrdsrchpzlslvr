@@ -6,15 +6,10 @@ from wrdpzl import(Board, solve)
 def words():
     return [
         'acmes',
+        'at',
         'babe',
         'cab',
         'puzzle',
-        'puzzled',
-        'puzzlement',
-        'puzzler',
-        'puzzlers',
-        'puzzles',
-        'puzzling',
     ]
 
 
@@ -79,6 +74,46 @@ def words():
         '.a....',
         '..b...',
     ]), ['cab']),
+    (Board.load([
+        '......',
+        '......',
+        '......',
+        '......',
+        'a.....',
+        '.t....',
+    ]), ['at']),
+    (Board.load([
+        '.a....',
+        '..c...',
+        '...m..',
+        '....e.',
+        '.....s',
+        '......',
+    ]), ['acmes']),
+    (Board.load([
+        '..b...',
+        '...a..',
+        '....b.',
+        '.....e',
+        '......',
+        '......',
+    ]), ['babe']),
+    (Board.load([
+        '...c..',
+        '....a.',
+        '.....b',
+        '......',
+        '......',
+        '......',
+    ]), ['cab']),
+    (Board.load([
+        '....a.',
+        '.....t',
+        '......',
+        '......',
+        '......',
+        '......',
+    ]), ['at']),
 ])
 def test_find_words_on(board, words, expected):
     assert solve(board, words) == expected

@@ -53,4 +53,6 @@ def solve(board, words):
     for column in range(0, column_count):
         found.extend(hunter.find_in_string(
             ''.join(map(str, board.iterate((0, column), Grid.DOWNWARD)))))
+        found.extend(hunter.find_in_string(
+            ''.join(map(str, board.iterate((0, column + 1), Grid.DIAGONALLY_DOWN_RIGHT)))))
     return found
