@@ -1,5 +1,5 @@
 from pytest import (fixture, mark)
-from wrdpzl import(Board, solve)
+from wrdpzl import(Board, Solver)
 
 
 @mark.parametrize('board, words', [
@@ -103,4 +103,4 @@ from wrdpzl import(Board, solve)
     (Board.load(['start']), ['start', 'star', 'tart', 'art', 'rat', 'at']),
 ])
 def test_solve(board, words):
-    assert sorted(solve(board, words)) == sorted(words)
+    assert sorted(Solver(words).solve(board)) == sorted(words)

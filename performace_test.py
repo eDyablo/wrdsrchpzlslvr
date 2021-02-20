@@ -1,5 +1,5 @@
 from pytest import (fixture, mark)
-from wrdpzl import(Board, solve)
+from wrdpzl import(Board, Solver)
 
 
 @fixture(scope='module')
@@ -8,10 +8,16 @@ def words():
         return list(map(str.strip, file.readlines()))
 
 
+@fixture
+def solver(words):
+    return Solver(words)
+
+
 @mark.timeout(0.5)
 @mark.parametrize('board', [
+    (Board.load(['performance'] * 10)),
     (Board.load(['top' * 5] * 15)),
     (Board.load(['up' * 50] * 100)),
 ])
-def test_performance(board, words):
-    assert solve(board, words) != []
+def test_performance(board, solver):
+    assert solver.solve(board) != []
