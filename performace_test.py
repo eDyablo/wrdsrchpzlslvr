@@ -17,7 +17,7 @@ def solver(words):
 @mark.parametrize('board', [
     (Board.load(['performance'] * 10)),
     (Board.load(['top' * 5] * 15)),
-    (Board.load(['up' * 50] * 100)),
+    (Board.load(['up' * 75] * 150)),
 ])
 def test_performance(board, solver):
     assert solver.solve(board) != []
