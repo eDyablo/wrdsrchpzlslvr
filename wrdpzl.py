@@ -159,9 +159,9 @@ def argparser():
         version=f"{parser.prog} version 1.0.0"
     )
     parser.add_argument('-r', '--random', dest='random_size', default='15x15',
-                        help='random board size')
+                        help='random board size, default is 15x15')
     parser.add_argument('-w', '--words', dest='words_file', default='words.txt',
-                        help='file contains words')
+                        help='file contains words, default is ./words.txt')
     parser.add_argument('-l', '--letters', default='abcdefghijklmnopqrstuvwxyz',
                         help='sequence of letters')
     parser.add_argument('--no-board', dest='show_board',
