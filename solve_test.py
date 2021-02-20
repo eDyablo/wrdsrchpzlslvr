@@ -97,6 +97,10 @@ from wrdpzl import(Board, solve)
         ' llgoa',
         'eyext',
     ]), ['at', 'box', 'cage', 'daily', 'puzzle']),
+    (Board.load([]), []),
+    (Board.load(['word']), []),
+    (Board.load(['start']), ['start']),
+    (Board.load(['start']), ['start', 'star', 'tart', 'art', 'rat', 'at']),
 ])
 def test_solve(board, words):
-    assert sorted(solve(board, words)) == words
+    assert sorted(solve(board, words)) == sorted(words)
