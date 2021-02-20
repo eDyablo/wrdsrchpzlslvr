@@ -1,5 +1,5 @@
-from grid import Grid
 from pytest import fixture
+from wrdpzl import Grid
 
 
 @fixture
