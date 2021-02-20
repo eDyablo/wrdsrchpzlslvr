@@ -5,7 +5,7 @@ class Hunter:
     def __init__(self, words):
         self.__table = make_prefix_table(words)
 
-    def find_in_string(self, string):
+    def find(self, string):
         dictionary = self.__table
         found = []
         begin, end = 0, 0
@@ -47,22 +47,26 @@ def solve(board, words):
     row_count, column_count = board.size()
     for row in range(0, row_count):
         rightward = ''.join(map(str, board.iterate((row, 0), Grid.RIGHTWARD)))
-        found.extend(hunter.find_in_string(rightward))
-        found.extend(hunter.find_in_string(rightward[::-1]))
-        down_right = ''.join(map(str, board.iterate((row, 0), Grid.DIAGONALLY_DOWN_RIGHT)))
-        found.extend(hunter.find_in_string(down_right))
-        found.extend(hunter.find_in_string(down_right[::-1]))
-        up_right = ''.join(map(str, board.iterate((row + 1, 0), Grid.DIAGONALLY_UP_RIGHT)))
-        found.extend(hunter.find_in_string(up_right))
-        found.extend(hunter.find_in_string(up_right[::-1]))
+        found.extend(hunter.find(rightward))
+        found.extend(hunter.find(rightward[::-1]))
+        down_right = ''.join(map(str, board.iterate(
+            (row, 0), Grid.DIAGONALLY_DOWN_RIGHT)))
+        found.extend(hunter.find(down_right))
+        found.extend(hunter.find(down_right[::-1]))
+        up_right = ''.join(map(str, board.iterate(
+            (row + 1, 0), Grid.DIAGONALLY_UP_RIGHT)))
+        found.extend(hunter.find(up_right))
+        found.extend(hunter.find(up_right[::-1]))
     for column in range(0, column_count):
         downward = ''.join(map(str, board.iterate((0, column), Grid.DOWNWARD)))
-        found.extend(hunter.find_in_string(downward))
-        found.extend(hunter.find_in_string(downward[::-1]))
-        down_right = ''.join(map(str, board.iterate((0, column + 1), Grid.DIAGONALLY_DOWN_RIGHT)))
-        found.extend(hunter.find_in_string(down_right))
-        found.extend(hunter.find_in_string(down_right[::-1]))
-        up_right = ''.join(map(str, board.iterate((row_count - 1, column + 1), Grid.DIAGONALLY_UP_RIGHT)))
-        found.extend(hunter.find_in_string(up_right))
-        found.extend(hunter.find_in_string(up_right[::-1]))
+        found.extend(hunter.find(downward))
+        found.extend(hunter.find(downward[::-1]))
+        down_right = ''.join(map(str, board.iterate(
+            (0, column + 1), Grid.DIAGONALLY_DOWN_RIGHT)))
+        found.extend(hunter.find(down_right))
+        found.extend(hunter.find(down_right[::-1]))
+        up_right = ''.join(map(str, board.iterate(
+            (row_count - 1, column + 1), Grid.DIAGONALLY_UP_RIGHT)))
+        found.extend(hunter.find(up_right))
+        found.extend(hunter.find(up_right[::-1]))
     return found

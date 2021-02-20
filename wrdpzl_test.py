@@ -24,7 +24,7 @@ alphabet = [letter for letter in 'abcdefghijklmnopqrstuvwxyz']
 ])
 def test_words_from_dictionary_found_in_string(string, dictionary, words):
     hunter = Hunter(dictionary)
-    assert hunter.find_in_string(string) == words
+    assert hunter.find(string) == words
 
 
 @mark.parametrize('words, table', [
