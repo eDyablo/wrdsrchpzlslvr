@@ -152,7 +152,7 @@ class Solver:
 
 def argparser():
     parser = ArgumentParser(
-        description="Words search puzzle solver."
+        description="Words search puzzle solver"
     )
     parser.add_argument(
         "-v", "--version", action="version",
@@ -174,8 +174,11 @@ def argparser():
 
 
 def load_words(path):
-    with open(path) as file:
-        return list(map(str.strip, file.readlines()))
+    try:
+        with open(path) as file:
+            return list(map(str.strip, file.readlines()))
+    except:
+        return []
 
 
 def parse_size(text):
@@ -200,7 +203,7 @@ def main():
 
     found = Solver(words).solve(board)
 
-    print(len(found)) if found and args.show_count else None
+    print(len(found)) if args.show_count else None
     print(*found) if found and args.show_found else None
 
 
